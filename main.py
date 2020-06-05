@@ -301,7 +301,7 @@ class Bot:
             if self.trivia is None:
                 print("[TRIVIA] STARTING")
                 await self.sendmsg(
-                    "Trivia has started! Use {self.client.prefix}join to participate!"
+                    f"Trivia has started! Use {self.client.prefix}join to participate!"
                 )
                 await self.do_trivia()
 
@@ -325,7 +325,7 @@ class Bot:
             self.trivia.participants.remove(command.user)
 
         elif command.cmd == "help":
-            helpmsg = "Prefix: {self.client.prefix}, Commands: skip/next to skip the question, quit to remove yourself from trivia, join to join"
+            helpmsg = f"Prefix: {self.client.prefix}, Commands: skip/next to skip the question, quit to remove yourself from trivia, join to join"
             await self.sendmsg(helpmsg)
 
     async def do_trivia(self, is_next: Optional[bool] = False) -> NoReturn:
