@@ -99,13 +99,13 @@ class Room:
         return [user for user in self.users if user.lurker]
 
     def get_by_handle(self, handle: int) -> Optional[User]:
-        return __userloop(handle, "handle")
+        return self.__userloop(handle, "handle")
 
     def get_by_nick(self, nickname: str) -> Optional[User]:
-        return __userloop(nickname, "nick")
+        return self.__userloop(nickname, "nick")
 
     def get_by_username(self, username: str) -> Optional[User]:
-        return __userloop(username, "username")
+        return self.__userloop(username, "username")
 
     def set_nick(self, handle: int, newnick: str) -> NoReturn:
         user = self.get_by_handle(handle)
@@ -192,7 +192,7 @@ class Bot:
             return rtcversion
 
     def csrf(self) -> Optional[str]:
-        req = self.session.get(f"https://tinychat.com")
+        req = self.session.get(f"https://tinychat.com/start?")
         if req.status_code == 200:
             match = re.search('(?:csrf-token" content=")(\w+)', req.text)
             return match[1]
